@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StockDetail(),
+      home: MainScreen(),
       routes: {
         'MainScreen': (context) => MainScreen(),
         'StockDetails': (context) => StockEntry()
