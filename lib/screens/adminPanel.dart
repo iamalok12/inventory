@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/models/mainCurveWhite.dart';
+import 'package:inventory_app/screens/addUserScreen.dart';
 import '../screens/mainScreen.dart';
 
 class AdminPanel extends StatelessWidget {
@@ -48,7 +49,7 @@ class AdminPanel extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Grid("Add User",'assets/adduser.jpg',null),
+                        Grid("Add User",'assets/adduser.jpg',AddUserScreen()),
                         Grid("Delete User",'assets/deleteuser.png',null),
                       ],
                     ),

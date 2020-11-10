@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/models/mainCurveWhite.dart';
+import 'package:inventory_app/screens/addUserScreen.dart';
+import 'package:inventory_app/screens/stockDetail.dart';
+import 'package:inventory_app/screens/stockEntry.dart';
+import 'package:inventory_app/screens/adminPanel.dart';
+
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff351c56),
@@ -20,8 +27,8 @@ class MainScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: 50,
-              left: 65,
+              top: height * 0.05,
+              left: width * 0.15,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
@@ -38,28 +45,28 @@ class MainScreen extends StatelessWidget {
               child: Container(color: Colors.white),
             ),
             Positioned(
-              bottom: 300,
-              left: 30,
+              bottom: height * 0.4,
+              left: width * 0.1,
               child: Row(
                 children: [
-                  Grid('Stock Entry', 'assets/stockEntry.jpg',null),
+                  Grid('Stock Entry', 'assets/stockEntry.jpg',StockEntry()),
                   SizedBox(
                     width: 20,
                   ),
-                  Grid('Admin Panel', 'assets/adminPanel.png',null)
+                  Grid('Admin Panel', 'assets/adminPanel.png',AdminPanel()),
                 ],
               ),
             ),
             Positioned(
-              bottom: 100,
-              left: 30,
+              bottom: height * 0.15,
+              left: width * 0.1,
               child: Row(
                 children: [
-                  Grid('Add User', 'assets/addUser.png',null),
+                  Grid('Add User', 'assets/addUser.png',AddUserScreen()),
                   SizedBox(
                     width: 20,
                   ),
-                  Grid('Stock Details', 'assets/stockData.jpg',null)
+                  Grid('Stock Details', 'assets/stockData.jpg',StockDetail())
                 ],
               ),
             )
@@ -73,53 +80,48 @@ class MainScreen extends StatelessWidget {
 class Grid extends StatelessWidget {
   final String title;
   final String img;
-  Function onpress;
+  Widget routes;
 
-  Grid(this.title, this.img,this.onpress);
+  Grid(this.title, this.img,this.routes);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onpress,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10),
-        focusColor: Colors.white.withOpacity(0.5),
-        onTap: () {
-          if (title == 'Stock Entry') {
-            Navigator.of(context).pushNamed('StockDetails');
-          }
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      focusColor: Colors.white.withOpacity(0.5),
+      onTap: () {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => routes));
         },
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.height * 0.2,
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  img,
-                  fit: BoxFit.cover,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.2,
+        width: MediaQuery.of(context).size.height * 0.2,
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                img,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Center(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                color: Colors.black45,
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-              Center(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  color: Colors.black45,
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

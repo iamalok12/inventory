@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/screens/mainScreen.dart';
 import '../models/mainCurve.dart';
 
 class Start_Screen extends StatelessWidget {
@@ -51,7 +52,7 @@ class Start_Screen extends StatelessWidget {
                 ),
                 child: FlatButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('MainScreen');
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
                   },
                   child: Text(
                     'Get Started',
