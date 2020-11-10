@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/screens/start_screen.dart';
+import 'package:inventory_app/screens/stockDetail.dart';
+import 'file:///C:/Users/ialok/AndroidStudioProjects/inventory_app/lib/screens/adminPanel.dart';
+import './screens/stockEntry.dart';
+import './screens/mainScreen.dart';
 
 
 
@@ -12,7 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Start_Screen(),
+      home: StockDetail(),
+      routes: {
+        'MainScreen': (context) => MainScreen(),
+        'StockDetails': (context) => StockEntry()
+      },
     );
   }
 }
